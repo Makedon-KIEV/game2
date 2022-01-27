@@ -223,3 +223,29 @@ for (const i = 0; i < objects.length; i++) {
 if (hasDead) {
     objects.shift();
 }
+Collide(car) {
+    const hit = false;
+
+    if (this.y < car.y + car.image.height * scale && this.y + this.image.height * scale > car.y) //Если объекты находятся на одной линии по горизонтали
+    {
+        if (this.x + this.image.width * scale > car.x && this.x < car.x + car.image.width * scale) //Если объекты находятся на одной линии по вертикали
+        {
+            hit = true;
+        }
+    }
+
+    return hit;
+}
+var hit = false;
+
+for (const i = 0; i < objects.length; i++) {
+    if (i != player) {
+        hit = objects[player].Collide(objects[i]);
+
+        if (hit) {
+            alert("Вы врезались!");
+            Stop();
+            break;
+        }
+    }
+}
